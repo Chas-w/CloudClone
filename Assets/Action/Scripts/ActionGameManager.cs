@@ -1,11 +1,11 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ActionGameManager : MonoBehaviour
 {
     public GameObject cloudPrefab;
-
+    
     public int maxClouds;
     public int minClouds;
 

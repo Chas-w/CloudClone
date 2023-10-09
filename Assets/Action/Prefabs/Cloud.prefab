@@ -63,6 +63,7 @@ GameObject:
   - component: {fileID: 6499234239985243069}
   - component: {fileID: 5788507670351342592}
   - component: {fileID: 3737796303483933246}
+  - component: {fileID: 8496216910405697300}
   m_Layer: 0
   m_Name: Little
   m_TagString: Cloud
@@ -163,6 +164,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.18, y: 0.92}
   m_EdgeRadius: 0
+--- !u!114 &8496216910405697300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2469396944577796043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12f29771fed115c4e98aba63a80e7702, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTimerMax: 30
 --- !u!1 &2519302399846105680
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,6 +188,7 @@ GameObject:
   - component: {fileID: 5277754772163034000}
   - component: {fileID: 3954543478835287961}
   - component: {fileID: 2445833038559422994}
+  - component: {fileID: 4887711426726336006}
   m_Layer: 0
   m_Name: Middle
   m_TagString: Cloud
@@ -274,6 +289,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.77, y: 1.19}
   m_EdgeRadius: 0
+--- !u!114 &4887711426726336006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2519302399846105680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12f29771fed115c4e98aba63a80e7702, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTimerMax: 30
 --- !u!1 &5791697486864715146
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,6 +313,7 @@ GameObject:
   - component: {fileID: 1089008899758977162}
   - component: {fileID: 4764726606849410062}
   - component: {fileID: 1422447707059667229}
+  - component: {fileID: 6053123207602931680}
   m_Layer: 0
   m_Name: Big
   m_TagString: Cloud
@@ -385,3 +414,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.62, y: 1.25}
   m_EdgeRadius: 0
+--- !u!114 &6053123207602931680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5791697486864715146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12f29771fed115c4e98aba63a80e7702, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTimerMax: 30
