@@ -1,15 +1,17 @@
  using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ActionGameManager : MonoBehaviour
 {
     public GameObject cloudPrefab;
+    public ActionPlayer startCount;
     
     public int maxClouds;
     public int minClouds;
 
-    public float timeToCloud;
+    float timeToCloud;
 
     float timeToCloudCounter;
 
@@ -18,10 +20,11 @@ public class ActionGameManager : MonoBehaviour
     Vector3 minBounds;
     Vector3 maxBounds;
 
-    List<GameObject> allClouds = new List<GameObject>();
+    public List<GameObject> allClouds = new List<GameObject>();
 
     private void Start()
     {
+        maxClouds = 15; minClouds = 15;
         worldBounds = GetComponent<BoxCollider2D>();
         minBounds = worldBounds.bounds.min;
         maxBounds = worldBounds.bounds.max;
@@ -29,6 +32,12 @@ public class ActionGameManager : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(allClouds.Count);
+        if (startCount.gameStartCountDown <= 0)
+        {
+            timeToCloud = 0; 
+        } else { timeToCloud = 3; }
+
         timeToCloudCounter += Time.deltaTime;
         if (timeToCloudCounter > timeToCloud || allClouds.Count < minClouds)
         {
@@ -38,6 +47,11 @@ public class ActionGameManager : MonoBehaviour
                 timeToCloudCounter = 0;
             }
         }
+
+        //allClouds = allClouds.Where(x => x != null).ToList();
+        allClouds.RemoveAll(delegate (GameObject o) { return o == null; }); //destroys any NULL instance of an object within the allCLouds list
+
+
     }
 
     void MakeACloud()

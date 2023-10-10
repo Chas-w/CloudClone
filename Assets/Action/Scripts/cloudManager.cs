@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class cloudManager : MonoBehaviour
 {
     [SerializeField] float destroyTimerMax;
+    public float castDist = 2f;
     //[SerializeField] GameObject cloudParent;
     float destroyTimer;
 
@@ -14,24 +16,30 @@ public class cloudManager : MonoBehaviour
     {
         destroyTimer = destroyTimerMax;
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private void Update()
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            destroy = true;
-            //Destroy(this.gameObject);
-        }
+  
     }
- 
+
     // Update is called once per frame
     void FixedUpdate()
     {
-     if (destroy)
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, castDist); //holds the information from a raycast hit 
+
+        //Debug.DrawRay(transform.position, Vector2.up * castDist, Color.blue);
+
+        if (hit.collider != null && hit.transform.tag == "Player")
+        {
+            destroy = true;
+        }
+
+        if (destroy)
         {
             destroyTimer--;
         }   
 
-     if (destroyTimer <= 0)
+        if (destroyTimer <= 0)
         {
             Destroy(this.gameObject);
         }
