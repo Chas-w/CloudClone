@@ -230,6 +230,7 @@ MonoBehaviour:
   startCount: {fileID: 788613928}
   maxClouds: 15
   minClouds: 10
+  allClouds: []
 --- !u!61 &519575595
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -423,7 +424,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 786757611}
-  m_LocalRotation: {x: -0.006973137, y: 0.000000017864418, z: 1.2457407e-10, w: 0.9999757}
+  m_LocalRotation: {x: -0.0069994847, y: -0.000000017205958, z: -1.2043581e-10, w: 0.9999755}
   m_LocalPosition: {x: 0, y: 1.7399999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -794,7 +795,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1335771341}
-  m_LocalRotation: {x: -0.006973137, y: 0.000000017864418, z: 1.2457407e-10, w: 0.9999757}
+  m_LocalRotation: {x: -0.0069994847, y: -0.000000017205958, z: -1.2043581e-10, w: 0.9999755}
   m_LocalPosition: {x: 0, y: 1.7399999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

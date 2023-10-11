@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Cinemachine.DocumentationSortingAttribute;
+using TMPro;
 
 public class ActionPlayer : MonoBehaviour
 {
  //   public GameObject cloud;
 
-    [SerializeField] Transform deadZone;
+    //[SerializeField] Transform deadZone;
     [SerializeField] Transform lifeZone;
+    [SerializeField] TextMeshProUGUI scoreOut; 
     public KeyCode leftKey;
     public KeyCode rightKey;
 
@@ -17,12 +19,20 @@ public class ActionPlayer : MonoBehaviour
     public float bounceVel;
     public float spawnVel;
     public float gameStartCountDown = 30f;
+    public float castDist;
+
+    float respawnCounterMax = 10f;
+    float respawnCounter;
+    float score; 
 
     bool goLeft;
     bool goRight;
     bool bounce = true;
     bool startCountDown;
-    bool killed; 
+    bool killed;
+    bool stopCollisionsLeft;
+    bool stopCollisionsRight;
+    bool dead; 
 
     Rigidbody2D myBody;
 
@@ -30,6 +40,7 @@ public class ActionPlayer : MonoBehaviour
     {
         myBody = GetComponent<Rigidbody2D>();
         startCountDown = true;
+        respawnCounter = respawnCounterMax;
     }
 
     private void Update()
@@ -48,16 +59,32 @@ public class ActionPlayer : MonoBehaviour
             }
             else { goRight = false; }
             #endregion
+            
+            if (dead)
+            {
+                respawnCounter--; 
+                if (respawnCounter <= 0)
+                {
+                    this.transform.position = lifeZone.transform.position;
+                    killed = false;
+                    score--; 
+                    dead = false;
+                }
+            } else if (!dead) { respawnCounter = respawnCounterMax; }
         }
     }
 
     private void FixedUpdate()
     {
+       
+        scoreOut.text = score.ToString(); 
+
         float playerY = transform.position.y;
+        Vector3 newVel = myBody.velocity;
         if (!startCountDown)
         {
             #region movement
-            Vector3 newVel = myBody.velocity;
+            
 
             newVel.x *= 0.9f;
             newVel.y += gravity;
@@ -68,11 +95,11 @@ public class ActionPlayer : MonoBehaviour
                 bounce = false;
             }
 
-            if (goLeft)
+            if (goLeft && !stopCollisionsLeft)
             {
                 newVel.x -= xAccel;
             }
-            else if (goRight)
+            else if (goRight && !stopCollisionsRight)
             {
                 newVel.x += xAccel;
             }
@@ -81,6 +108,13 @@ public class ActionPlayer : MonoBehaviour
             #endregion
         }
 
+        /*
+        if (killed)
+        {
+            newVel.y--;
+            myBody.velocity = newVel;
+        }
+        */
         if (startCountDown)
         {
            // Vector3 newVel = myBody.velocity;
@@ -97,11 +131,13 @@ public class ActionPlayer : MonoBehaviour
     {
         if (!startCountDown) 
         { 
+            
             if (collision.gameObject.tag == "Cloud")
             {
                 if (collision.gameObject.transform.position.y < this.transform.position.y) { bounce = true; }
                 if (collision.gameObject.transform.position.y >= this.transform.position.y) { Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>()); }
             }
+            
         }
         
         if (collision.gameObject.tag == "Player")
@@ -109,7 +145,40 @@ public class ActionPlayer : MonoBehaviour
             if (collision.gameObject.transform.position.y > this.transform.position.y)
             {
                 killed = true;
+                //Debug.Log(killed);
+            } else if (collision.gameObject.transform.position.y < this.transform.position.y)
+            {
+                score++; 
             }
+
+        }
+
+        if (collision.gameObject.tag == "BarrierLeft")
+        {
+            stopCollisionsLeft = true;
+        }
+        if (collision.gameObject.tag == "BarrierRight")
+        {
+            stopCollisionsRight = true;
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "BarrierLeft")
+        {
+            stopCollisionsLeft = false;
+        }
+        if (collision.gameObject.tag == "BarrierRight")
+        {
+            stopCollisionsRight = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Respawn")
+        {
+            dead = true; 
         }
     }
 }
